@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>iSika formulaire Mots-clés</title>
+  <style>
+    body { font-family: sans-serif; padding: 10vw; background:#e7f3fa; }
+    input, button { font-size: 1.2em; margin-top:10px; width:100%; }
+    label { font-size:1.3em }
+  </style>
+</head>
+<body>
+  <form id="keywordsForm">
+    <label for="keywords">Entrer les mots-clés pour iSika Feed Videos(séparés par une virgule):</label>
+    <input type="text" id="keywords" name="keywords" placeholder="ex: ebola, prévention, vaccin">
+    <button type="submit">Envoyer</button>
+  </form>
+  <div id="status"></div>
+  <script>
+    document.getElementById('keywordsForm').onsubmit = function(e){
+      e.preventDefault();
+      const raw = document.getElementById('keywords').value;
+      const keywords = raw.split(',').map(k => k.trim()).filter(Boolean);
+      fetch('https://TON_URL_WEBHOOK', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ keywords })
+      })
+      .then(res => document.getElementById('status').innerText = res.ok ? "✅ Keywords envoyés!" : "❌ Erreur envoi!")
+      .catch(e => document.getElementById('status').innerText = "Erreur réseau!");
+    };
+  </script>
+</body>
+</html>
