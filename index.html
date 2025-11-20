@@ -21,7 +21,7 @@
       e.preventDefault();
       const raw = document.getElementById('keywords').value;
       const keywords = raw.split(',').map(k => k.trim()).filter(Boolean);
-      fetch('https://delinquently-nondeveloping-simona.ngrok-free.dev/webhook-test/69364c6a-a36d-4683-b492-e7096da692f6', {
+      fetch('https://delinquently-nondeveloping-simona.ngrok-free.dev/webhook/69364c6a-a36d-4683-b492-e7096da692f6', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ keywords })
@@ -32,4 +32,5 @@
   </script>
 </body>
 </html>
+
 
